@@ -16,12 +16,6 @@ $p = new Pessoa("crudepdo","localhost","root","");
     {
         if(isset($_GET['id_up']) && !empty($_GET['id_up']))
         {
-
-        }
-        else
-        {
-            
-        }
             $id_upd = addslashes($_GET['id_up']);
             $nome = addslashes($_POST['nome']);
             $telefone = addslashes($_POST['telefone']);
@@ -37,7 +31,27 @@ $p = new Pessoa("crudepdo","localhost","root","");
             {
             echo "Preencha todos os campos";
             }
+        
+
         }
+        else
+        {
+            $nome = addslashes($_POST['nome']);
+                $telefone = addslashes($_POST['telefone']);
+                $email = addslashes($_POST['email']);
+                if (!empty($nome) && !empty($telefone) && !empty($email)) { // se não estiver vazio
+                    //cadrastar
+                    if (!$p->cadastrarPessoa($nome, $telefone, $email)){ // se o retorno for false, executa esse if
+                        echo"Email já está cadrastado!";
+                    }
+                }else {
+                    echo "Preencha todos os campos";
+                }
+            
+        
+          
+        }
+    }
     ?>
     <?php
         if(isset($_GET['id_up']))
